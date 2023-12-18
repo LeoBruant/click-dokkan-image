@@ -76,7 +76,7 @@ def load_and_convert_image(image_source: Union[str, Image.Image]) -> ImageData:
 
 def auto_battle() -> None:
     """Automatically battles by clicking on images."""
-    image_files = glob.glob(f"{Config.TARGETS_DIRECTORY}/*.png")
+    image_files = sorted(glob.glob(f"{Config.TARGETS_DIRECTORY}/*.png"))
     images = [load_and_convert_image(img) for img in image_files if img is not None]
 
     while True:
