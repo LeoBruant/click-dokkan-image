@@ -4,7 +4,6 @@ import numpy as np
 import pyautogui
 import time
 from dataclasses import dataclass
-from mss import mss
 from pathlib import Path
 from PIL import Image
 from termcolor import colored
@@ -44,12 +43,10 @@ def click_image(image_data: ImageData) -> bool:
 
 def find_image_on_screen(image_data: ImageData) -> Optional[Tuple[int, int]]:
     """Finds the image on the screen and returns its location."""
-    with mss() as sct:
-        screenshot = sct.grab(sct.monitors[0])
-    screenshot_img = Image.frombytes("RGB", screenshot.size, screenshot.bgra, "raw", "BGRX")
-    screenshot_np = np.array(screenshot_img)
+    screenshot = pyautogui.screenshot()
+    screenshot_img = load_and_convert_image(screenshot)
 
-    match_result = cv2.matchTemplate(screenshot_np, image_data.data, cv2.TM_CCOEFF_NORMED)
+    match_result = cv2.matchTemplate(screenshot_img.data, image_data.data, cv2.TM_CCOEFF_NORMED)
     _, max_val, _, max_loc = cv2.minMaxLoc(match_result)
 
     print(
