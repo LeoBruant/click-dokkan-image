@@ -78,7 +78,7 @@ def auto_battle() -> None:
     """Automatically battles by clicking on images."""
     image_files = sorted(glob.glob(f"{Config.TARGETS_DIRECTORY}/*.png"))
     images = [load_and_convert_image(img) for img in image_files if img is not None]
-    round_count = 0
+    round_count = 1
 
     while True:
         print('\n')
