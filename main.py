@@ -83,7 +83,7 @@ def auto_battle() -> None:
 
     while round_count <= round_limit:
         print('\n')
-        print(f"Starting round {colored(str(round_count), 'blue')}")
+        print(f"Starting round {colored(str(round_count), 'yellow')} / {colored(str(round_limit), 'blue')}")
         print('\n')
 
         for image_data in images:
