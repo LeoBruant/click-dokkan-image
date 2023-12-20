@@ -78,12 +78,19 @@ def auto_battle() -> None:
     """Automatically battles by clicking on images."""
     image_files = sorted(glob.glob(f"{Config.TARGETS_DIRECTORY}/*.png"))
     images = [load_and_convert_image(img) for img in image_files if img is not None]
+    round_count = 0
 
     while True:
+        print('\n')
+        print(f"Starting round {colored(str(round_count), 'blue')}")
+        print('\n')
+
         for image_data in images:
             while not click_image(image_data):
                 time.sleep(Config.TIMEOUT)
             print("\n" + colored(f'Clicked on "{image_data.path.name}" !', 'green') + "\n")
+        
+        round_count += 1
 
 def main():
     """Main function to execute the script."""
